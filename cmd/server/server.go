@@ -2,8 +2,8 @@ package main
 
 import (
 	"database/sql"
-	"go-graphql/graph"
-	"go-graphql/internal/database"
+	"github.com/andre2ar/go-graphql/graph"
+	"github.com/andre2ar/go-graphql/internal/database"
 	"log"
 	"net/http"
 	"os"
@@ -23,6 +23,7 @@ func main() {
 	defer db.Close()
 
 	categoryRepository := database.NewCategory(db)
+	courseRepository := database.NewCourse(db)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -31,6 +32,7 @@ func main() {
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{
 		CategoryRepository: categoryRepository,
+		CourseRepository:   courseRepository,
 	}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))

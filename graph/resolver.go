@@ -1,6 +1,6 @@
 package graph
 
-import "go-graphql/internal/database"
+import "github.com/andre2ar/go-graphql/internal/database"
 
 // This file will not be regenerated automatically.
 //
@@ -8,4 +8,5 @@ import "go-graphql/internal/database"
 
 type Resolver struct {
 	CategoryRepository *database.Category
+	CourseRepository   *database.Course
 }
